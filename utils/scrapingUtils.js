@@ -18,7 +18,20 @@ const findElementByText = async (page, { parent, child, text }) => {
  */
 const randomDelay = () => new Promise(resolve => setTimeout(resolve, Math.random() * 500 + 2000));
 
+/**
+ * Performs random operations to mimic human interaction.
+ * @param {Object} page - The puppeteer page object.
+ */
+async function simulateHumanInteraction(page) {
+  await page.waitForTimeout(randomDelay());
+  await page.mouse.move(Math.random() * 500, Math.random() * 600);
+  await page.keyboard.press('PageDown');
+  await page.waitForTimeout(randomDelay());
+
+}
+
 module.exports = {
   findElementByText,
-  randomDelay
+  randomDelay,
+  simulateHumanInteraction,
 };

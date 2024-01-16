@@ -12,7 +12,7 @@ const { setupDirectories, writeFile } = require('./utils/fileOperations');
 (async () => {
   try {
     // Launching puppeteer browser
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: 'new' });
     // Creating a new page in the browser
     const page = await browser.newPage();
 

@@ -1,5 +1,5 @@
 const userAgent = require('user-agents');
-const { randomDelay, findElementByText } = require('./utils/scrapingUtils');
+const { randomDelay, findElementByText, simulateHumanInteraction } = require('./utils/scrapingUtils');
 
 /**
  * Scrapes data from a webpage.
@@ -12,6 +12,7 @@ async function scrapeData(page, iteration, config) {
     await setUserAgent(page);
     await navigateToPage(page, config.url);
     await randomDelay();
+    await simulateHumanInteraction(page);
 
     // Using a custom utility function to find elements by text. This is useful for complex selectors
     // or when the element cannot be easily selected using standard CSS selectors.
@@ -35,7 +36,7 @@ async function setUserAgent(page) {
 }
 
 async function navigateToPage(page, url) {
-  await page.goto(url, { waitUntil: 'networkidle2' })
+  await page.goto(url, { waitUntil: 'networkidle2', referer: 'https://www.google.com/' })
 }
 
 module.exports = {
